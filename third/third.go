@@ -43,11 +43,37 @@ func findPriority(rucksack string) int {
 	return priority
 }
 
+func findGrouPriority(group [3]string) int {
+	var priority int
+
+	for _, item := range strings.Split(group[0], "") {
+		if strings.Contains(group[1], item) && strings.Contains(group[2], item) {
+			priority = prioritymap[item]
+			break
+		}
+	}
+
+	return priority
+}
+
 func SumPriorities(path string) int {
 	var sum int
 
 	for _, rucksack := range parse(path) {
 		sum += findPriority(rucksack)
+	}
+
+	return sum
+}
+
+func SumGroupPriorities(path string) int {
+	var sum int
+
+	rucksacks := parse(path)
+
+	for i := 0; i < len(rucksacks); i += 3 {
+		group := (*[3]string)(rucksacks[i : i+3])
+		sum += findGrouPriority(*group)
 	}
 
 	return sum
