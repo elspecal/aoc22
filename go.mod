@@ -1,3 +1,3 @@
-module github.com/csepella/aoc22
+module github.com/elspecal/aoc22
 
 go 1.19
