@@ -1,9 +1,9 @@
 package third
 
 import (
-	"log"
-	"os"
 	"strings"
+
+	"github.com/elspecal/aoc22/common"
 )
 
 var prioritymap = map[string]int{
@@ -14,15 +14,6 @@ var prioritymap = map[string]int{
 	"H": 34, "I": 35, "J": 36, "K": 37, "L": 38, "M": 39, "N": 40, "O": 41,
 	"P": 42, "Q": 43, "R": 44, "S": 45, "T": 46, "U": 47, "V": 48, "W": 49,
 	"X": 50, "Y": 51, "Z": 52,
-}
-
-func parse(path string) []string {
-	rawinput, err := os.ReadFile(path)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return strings.Split(strings.TrimSpace(string(rawinput)), "\n")
 }
 
 func findPriority(rucksack string) int {
@@ -59,7 +50,7 @@ func findGrouPriority(group [3]string) int {
 func SumPriorities(path string) int {
 	var sum int
 
-	for _, rucksack := range parse(path) {
+	for _, rucksack := range common.Parse(path) {
 		sum += findPriority(rucksack)
 	}
 
@@ -69,7 +60,7 @@ func SumPriorities(path string) int {
 func SumGroupPriorities(path string) int {
 	var sum int
 
-	rucksacks := parse(path)
+	rucksacks := common.Parse(path)
 
 	for i := 0; i < len(rucksacks); i += 3 {
 		group := (*[3]string)(rucksacks[i : i+3])

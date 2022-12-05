@@ -1,9 +1,9 @@
 package second
 
 import (
-	"log"
-	"os"
 	"strings"
+
+	"github.com/elspecal/aoc22/common"
 )
 
 var ruleA = map[[2]string]int{
@@ -30,18 +30,9 @@ var ruleB = map[[2]string]int{
 	{"C", "Z"}: 7,
 }
 
-func parse(path string) []string {
-	rawinput, err := os.ReadFile(path)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return strings.Split(strings.TrimSpace(string(rawinput)), "\n")
-}
-
 func getTotalScore(path string, rule map[[2]string]int) int {
 	var score int
-	strategy := parse(path)
+	strategy := common.Parse(path)
 
 	for _, round := range strategy {
 		choices := (*[2]string)(strings.Split(round, " "))
